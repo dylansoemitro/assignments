@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 
+//define struct with variables name, opening hour, closing hour, and rating (in terms of stars)
 struct restaurant{
   char name[64];
   int openHour;
@@ -12,7 +13,6 @@ struct restaurant{
 int main() {
 
   struct restaurant restaurant_arr[3];
-  //struct restaurant restaurant1, restaurant2, restaurant3;
 
   strcpy(restaurant_arr[0].name, "Sushi Atsumi");
   restaurant_arr[0].openHour = 11;
@@ -42,11 +42,11 @@ int main() {
   printf("What restaurant do you want to visit ? [0,1,2] ");
   scanf("%d", &restaurantToVisit);
 
-  if (hour == restaurant_arr[restaurantToVisit].closeHour){
+  if (hour == restaurant_arr[restaurantToVisit].closeHour){ //edge case where time coincides with restaurant closing time
      printf("Sorry, %s is closing!", restaurant_arr[restaurantToVisit].name);
   }
-  else if (restaurant_arr[restaurantToVisit].closeHour > restaurant_arr[restaurantToVisit].openHour){
-      if(hour < restaurant_arr[restaurantToVisit].closeHour && hour > restaurant_arr[restaurantToVisit].openHour){
+  else if (restaurant_arr[restaurantToVisit].closeHour > restaurant_arr[restaurantToVisit].openHour){ //case where restaurant is not open past midnight
+      if(hour < restaurant_arr[restaurantToVisit].closeHour && hour > restaurant_arr[restaurantToVisit].openHour){ //check between opening and closing time
         printf("Excellent choice. %s will be open for %d more hours.\n", restaurant_arr[restaurantToVisit].name, restaurant_arr[restaurantToVisit].closeHour-hour);
       }
       else if(hour > restaurant_arr[restaurantToVisit].closeHour){
@@ -56,11 +56,11 @@ int main() {
         printf("%s isn't open until %d o'clock!!\n", restaurant_arr[restaurantToVisit].name, restaurant_arr[restaurantToVisit].openHour);
       }
   }
-  else{
-    if(hour<24 && hour>restaurant_arr[restaurantToVisit].openHour){
+  else{ //case where restaurant is open past midnight
+    if(hour<24 && hour>restaurant_arr[restaurantToVisit].openHour){ //check if in between opening time and midnight
       printf("Excellent choice. %s will be open for %d more hours.\n", restaurant_arr[restaurantToVisit].name, 24-hour);
     } 
-    else if(hour<restaurant_arr[restaurantToVisit].closeHour){
+    else if(hour<restaurant_arr[restaurantToVisit].closeHour){ //check if in between 00:00 and closing time
       printf("Excellent choice. %s will be open for %d more hours.\n", restaurant_arr[restaurantToVisit].name, restaurant_arr[restaurantToVisit].closeHour-hour);
     }
     else if(hour > restaurant_arr[restaurantToVisit].closeHour){
