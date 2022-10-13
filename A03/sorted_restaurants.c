@@ -53,30 +53,7 @@ struct node* insert_sorted(struct node *head, struct restaurant restaurant_vars)
   curr->next = n;
   return head;
 }
-// struct node* insert_sorted(struct node *head, struct restaurant restaurant_vars){
-//   //initialize node
-//   struct node *n = malloc(sizeof(struct node));
-//   n->restaurant_vars = restaurant_vars;
-//   n->next = NULL;
-//   //if head is null, return node
-//   if (head == NULL){
-//     return n;
-//   }
-//   printf("%f\n",restaurant_vars.stars);
-//   //if head is less than node, insert node at head
-//   if (head->restaurant_vars->stars < restaurant_vars.stars){
-//     n->next = head;
-//     return n;
-//   }
-//   struct node *curr = head;
-//   //iterate to find right spot to insert node
-//   while (curr->next != NULL && curr->next->restaurant_vars->stars > restaurant_vars.stars){
-//     curr = curr->next;
-//   }
-//   n->next = curr->next;
-//   curr->next = n;
-//   return head;
-// }
+
 void clear(struct node *head){
   struct node *curr = head;
   while (curr != NULL){
