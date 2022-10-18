@@ -79,8 +79,12 @@ int main(int argc, char *argv[]) {
         }
         column++;
         }
-
     
+    while(stack.top != -1){
+        printf("Unmatched braces on Line %d and Column %d\n", stack.array[stack.top].line, stack.array[stack.top].column);
+        pop(&stack);
+    }
+
     fclose(infile);
     return 0;
 }
