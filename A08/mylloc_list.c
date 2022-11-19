@@ -18,14 +18,14 @@ void *malloc (size_t size) {
   struct chunk *prev = NULL;
   while (next != NULL){
     if (next->size >= size){
-      next -> used = 1;
       if (prev != NULL){
         prev->next = next->next;
       } 
       else {
         flist = next->next;
       }
-      return((void*)(next+1));
+      next -> used = size;
+      return (void*)(next+1);
     }
     else {
       prev = next;
@@ -33,7 +33,7 @@ void *malloc (size_t size) {
     }
   }
   void *memory = sbrk(size + sizeof(struct chunk));
-  if (memory == (void*)-1){
+  if (memory == (void *)-1){
     return NULL;
   }
   else{
@@ -42,19 +42,15 @@ void *malloc (size_t size) {
     cnk->used = size;
     return (void*)(cnk+1);
   }
-  return NULL;
 }
 
 void free(void *memory) {
   // TODO: Implement malloc with a free list (See reading for details)
-  if (memory == NULL) {
-    struct chunk *cnk = (struct chunk *)((struct chunk *)memory - 1);
+  if (memory != NULL) {
+    struct chunk *cnk = (struct chunk*)((struct chunk*)memory - 1);
     cnk->next = flist;
     cnk->used = 0;
     flist = cnk;
   }
-
-  
-  
   return;
 }
