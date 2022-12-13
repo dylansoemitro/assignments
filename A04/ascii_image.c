@@ -57,6 +57,7 @@ int main(int argc, char** argv) {
     printf("\n");
   }
   free(image);
+  free(output);
 
   return 0;
 }
